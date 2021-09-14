@@ -6,10 +6,11 @@ module full_adder_a34
         logic[SIZE-1:0]p, g;
                 always_comb
                     begin
-                    p = a ^ b;
-                    g = a & b;
-                    sum = p ^ c_in;
-                    c_out = g | (p & c_in);
+                    	p <= a ^ b;  //nonblocking
+            		g <= a & b;  //nonblocking
+
+            		sum <= p ^ c_in;
+            		c_out <= g | (p & c_in);
                 end
 
 endmodule

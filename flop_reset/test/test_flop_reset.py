@@ -12,11 +12,11 @@ async def ffr_basic_test(dut):
 
     val = 1
     dut.d <= val
-    reset = 0
-    dut.reset <= reset
+    r = 0
+    dut.reset <= r
     await FallingEdge(dut.clk)
 
-    assert dut.q.value == flop_reset(val), "Randomised " \
+    assert dut.q.value == flop_reset(val, r), "Randomised " \
                                           "output q was incorrect on the" \
                                           "{}th cycle"
 
@@ -26,16 +26,14 @@ async def ffr_randomised_test(dut):
     cocotb.fork(clock.start())
     for i in range(15):
         val = random.randint(0, 1)
+        r = random.randint(0, 1)
         dut.d <= val
+        dut.reset <= r
         await FallingEdge(dut.clk)
-        assert dut.q.value == flop_reset(val), "Randomised " \
+        assert dut.q.value == flop_reset(val, r), "Randomised " \
                                    "output q was incorrect on the" \
                                    "{}th cycle".format(i)
-    val = 1
-    dut.d <= val
-    dut.reset <= 1
-    await FallingEdge(dut.clk)
-    assert dut.q.value == 0
+   
 
 
 

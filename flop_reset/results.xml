@@ -1,0 +1,7 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1631634001" />
+    <testcase name="ffr_basic_test" classname="test_flop_reset" file="/home/olufemi/Desktop/vlsi-cad/vlsi-repo/flop_reset/test/test_flop_reset.py" lineno="8" time="0.0042493343353271484" sim_time_ns="5.001" ratio_time="1176.8902151153006" />
+    <testcase name="ffr_randomised_test" classname="test_flop_reset" file="/home/olufemi/Desktop/vlsi-cad/vlsi-repo/flop_reset/test/test_flop_reset.py" lineno="23" time="0.009636163711547852" sim_time_ns="145.001" ratio_time="15047.585775886386" />
+  </testsuite>
+</testsuites>

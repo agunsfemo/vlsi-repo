@@ -5,11 +5,8 @@ module flop_reset
                 input logic [SIZE:0] d,
                 output logic [SIZE:0] q);
       always_ff @(posedge clk)
-      begin
-      if (reset == 1) q <= 4'b0;
+      if (reset) q <= 4'b0;
 
-        else q <= d;
-      end
-
+      else q <= d;    
 endmodule
 	
