@@ -10,7 +10,7 @@ Each example was written in SystemVerilog (i.e, the .SV file). Also, a Python mo
 2. Logic Gates
 3. Full Adder
 4. Register
-5. Resettable Register
+5. Resettable Register (Synchronous)
 6. Full Adder (Using Nonblocking Assignments)
 7. History FSM (Finite State Machine)
 
