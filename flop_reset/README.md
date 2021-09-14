@@ -79,8 +79,9 @@ returning the input value d when reset is 0.
 
 ### GTKwave
 ![Screenshot from 2021-09-14 16-44-23](https://user-images.githubusercontent.com/88589656/133292035-6fa384fc-cdd4-4846-b3ca-21fc7ba08972.png)
+### Synth
 ![Screenshot from 2021-09-14 16-46-09](https://user-images.githubusercontent.com/88589656/133292034-5947f494-ee13-46f9-b6c7-8e9d772169e4.png)
 
-### Synth
+
 
 
