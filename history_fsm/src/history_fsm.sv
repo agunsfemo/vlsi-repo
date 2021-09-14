@@ -29,9 +29,9 @@ module history_fsm(input logic clk,
      default:    nextstate = s0;
    endcase
 
-// Output Logic
-assign x = ((state == s1 | state == s2) & ~a) |
+  // Output Logic
+  assign x = ((state == s1 | state == s2) & ~a) |
 	    ((state == s3 | state == s4) & a);
-assign y = (state == s2 & ~a) | (state == s4 & a);
+  assign y = (state == s2 & ~a) | (state == s4 & a);
 endmodule
 	

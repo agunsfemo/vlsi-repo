@@ -2,7 +2,7 @@ state, nextstate = 0, 0
 num_calls = 0
 start = 1
 a_prev = 0
-def history_fsm(rst, a):
+def history_fsm(rst, a,):
     global state, nextstate
     global start
     global num_calls

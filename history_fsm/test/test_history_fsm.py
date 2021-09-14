@@ -20,24 +20,24 @@ async def history_fsm_random_tb(dut):
         await FallingEdge(dut.clk)
 
         cycle = i+1
-        px, py, pstate, nextstate, ps, pn, n_c= history_fsm(r, a)  #Python model
+        px, py, pstate, nstate, ps, pn, n_c= history_fsm(r, a)  #Python model
         print(f"{cycle} cycle inputs (r, a): {r}, {a} -----> (sv state, next: { dut.state.value} {dut.nextstate.value})"\
-              f"  (python state, next: {pstate}, {pnext})\n")
+              f"  (python state, next: {pstate}, {nstate})\n")
 
         assert dut.state.value == pstate, f"Output was incorrect on the {cycle}th (p={n_c}) cycle\n" \
                                           f"Inputs: {r}, {a}\n" \
                                           f"SV state is: {dut.state.value}" \
                                           f"Python state is: {pstate} (prev: state, next = {ps} {pn})"
-        assert dut.nextstate.value == nextstate, f"Output was incorrect on the {cycle}th (p={n_c}) cycle\n" \
+        assert dut.nextstate.value == nstate, f"Output was incorrect on the {cycle}th (p={n_c}) cycle\n" \
                                              f"Inputs: {r}, {a}\n" \
                                              f"SV next is: {dut.nextstate.value}, " \
-                                             f"Python next is: {pnext} (prev: state, next = {ps} {pn})"
+                                             f"Python next is: {nstate} (prev: state, next = {ps} {pn})"
         assert dut.x.value == px, f"Output was incorrect on the {cycle}th (p={n_c})  cycle\n" \
                                   f"Inputs: {r}, {a}\n" \
                                   f"SV x is: {dut.x.value}, " \
-                                  f"Python x is: {px} (state, next = {pstate} {pnext})"
+                                  f"Python x is: {px} (state, next = {pstate} {nstate})"
         assert dut.y.value == py, f"Output was incorrect on the {cycle}th (p={n_c})  cycle\n" \
                                   f"Inputs: {r}, {a}\n"\
                                   f"SV y is: {dut.y.value}, " \
-                                  f"Python y is: {py} (state, next = {pstate} {pnext})"
+                                  f"Python y is: {py} (state, next = {pstate} {nstate})"
 
