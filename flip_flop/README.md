@@ -88,10 +88,10 @@ from 1 to 0.
                                       
 ## Results
 
-## GTKwave
+### GTKwave
 ![Screenshot from 2021-09-14 14-53-49](https://user-images.githubusercontent.com/88589656/133270896-86287cf5-b669-4aa6-b1e8-0ea099d7a865.png)
 
-## Synth
+### Synth
 ![Screenshot from 2021-09-14 14-56-56](https://user-images.githubusercontent.com/88589656/133271308-4c60a049-03df-452c-815a-ce24b18292a1.png)
 
                          
