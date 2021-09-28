@@ -1,0 +1,61 @@
+#! /usr/local/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/usr/local/lib/ivl/system.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/local/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/local/lib/ivl/v2005_math.vpi";
+:vpi_module "/usr/local/lib/ivl/va_math.vpi";
+:vpi_module "/usr/local/lib/ivl/v2009.vpi";
+S_0x55aae0a61890 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x55aae0a61a20 .scope module, "gates" "gates" 3 2;
+ .timescale -9 -12;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /OUTPUT 1 "yand";
+    .port_info 3 /OUTPUT 1 "yor";
+    .port_info 4 /OUTPUT 1 "yxor";
+    .port_info 5 /OUTPUT 1 "ynand";
+    .port_info 6 /OUTPUT 1 "ynor";
+    .port_info 7 /OUTPUT 1 "yxnor";
+P_0x55aae0a604e0 .param/l "W" 0 3 3, +C4<00000000000000000000000000000001>;
+o0x7fdc96edd0a8 .functor BUFZ 1, C4<z>; HiZ drive
+o0x7fdc96edd0d8 .functor BUFZ 1, C4<z>; HiZ drive
+L_0x55aae0a73950 .functor AND 1, o0x7fdc96edd0a8, o0x7fdc96edd0d8, C4<1>, C4<1>;
+L_0x55aae0a739e0 .functor OR 1, o0x7fdc96edd0a8, o0x7fdc96edd0d8, C4<0>, C4<0>;
+L_0x55aae0a73ad0 .functor XOR 1, o0x7fdc96edd0a8, o0x7fdc96edd0d8, C4<0>, C4<0>;
+L_0x55aae0a73b40 .functor AND 1, o0x7fdc96edd0a8, o0x7fdc96edd0d8, C4<1>, C4<1>;
+L_0x55aae0a73be0 .functor NOT 1, L_0x55aae0a73b40, C4<0>, C4<0>, C4<0>;
+L_0x55aae0a73c80 .functor OR 1, o0x7fdc96edd0a8, o0x7fdc96edd0d8, C4<0>, C4<0>;
+L_0x55aae0a73d30 .functor NOT 1, L_0x55aae0a73c80, C4<0>, C4<0>, C4<0>;
+L_0x55aae0a73da0 .functor XOR 1, o0x7fdc96edd0a8, o0x7fdc96edd0d8, C4<0>, C4<0>;
+L_0x55aae0a73e60 .functor NOT 1, L_0x55aae0a73da0, C4<0>, C4<0>, C4<0>;
+v0x55aae0a4f4c0_0 .net *"_ivl_10", 0 0, L_0x55aae0a73c80;  1 drivers
+v0x55aae0a72f60_0 .net *"_ivl_14", 0 0, L_0x55aae0a73da0;  1 drivers
+v0x55aae0a73040_0 .net *"_ivl_6", 0 0, L_0x55aae0a73b40;  1 drivers
+v0x55aae0a73100_0 .net "a", 0 0, o0x7fdc96edd0a8;  0 drivers
+v0x55aae0a731e0_0 .net "b", 0 0, o0x7fdc96edd0d8;  0 drivers
+v0x55aae0a73310_0 .net "yand", 0 0, L_0x55aae0a73950;  1 drivers
+v0x55aae0a733f0_0 .net "ynand", 0 0, L_0x55aae0a73be0;  1 drivers
+v0x55aae0a734d0_0 .net "ynor", 0 0, L_0x55aae0a73d30;  1 drivers
+v0x55aae0a735b0_0 .net "yor", 0 0, L_0x55aae0a739e0;  1 drivers
+v0x55aae0a73690_0 .net "yxnor", 0 0, L_0x55aae0a73e60;  1 drivers
+v0x55aae0a73770_0 .net "yxor", 0 0, L_0x55aae0a73ad0;  1 drivers
+S_0x55aae0a4f330 .scope module, "dump" "dump" 4 1;
+ .timescale -9 -12;
+    .scope S_0x55aae0a4f330;
+T_0 ;
+    %vpi_call/w 4 3 "$dumpfile", "gates.vcd" {0 0 0};
+    %vpi_call/w 4 4 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x55aae0a61a20 {0 0 0};
+    %delay 1000, 0;
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "-";
+    "src/gates.sv";
+    "utils/dump_gates.sv";

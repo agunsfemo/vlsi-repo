@@ -1,0 +1,7 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1631644372" />
+    <testcase name="gate_basic_test" classname="test_gates" file="/home/olufemi/Desktop/vlsi-cad/vlsi-repo/gates/test/test_gates.py" lineno="8" time="0.0026390552520751953" sim_time_ns="2.001" ratio_time="758.225883458307" />
+    <testcase name="gate_randomised_test" classname="test_gates" file="/home/olufemi/Desktop/vlsi-cad/vlsi-repo/gates/test/test_gates.py" lineno="24" time="0.026222705841064453" sim_time_ns="100.00099999999999" ratio_time="3813.5271243976504" />
+  </testsuite>
+</testsuites>
