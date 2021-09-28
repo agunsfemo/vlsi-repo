@@ -16,10 +16,10 @@ module f_a(a0, a1, b0, b1, c_in, s, c_out);
 endmodule
 
 
-module rca #(parameter N=4)(input [N-1:0] a0,a1,b0,b1, input c_in, output [N:0] sum);
+module m_rca #(parameter N=4)(input [N-1:0] a0,a1,b0,b1, output [N:0] sum);
   wire [N:0] carry;
   wire [N-1 : 0]s;
-  assign carry[0] = c_in;
+  assign carry[0] = 1'b0;
    
    genvar i;
    generate 

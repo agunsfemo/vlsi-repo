@@ -1,8 +1,8 @@
-rca:
-	iverilog -o rca.vvp rca_tb.v rca.v
-	vvp rca.vvp
+m_rca:
+	iverilog -o m_rca.vvp m_rca_tb.v m_rca.v
+	vvp m_rca.vvp
 synth:
-	yosys -p "read_verilog rca.v ; proc ; opt ; show -colors 2 -width -signed"
+	yosys -p "read_verilog m_rca.v ; proc ; opt ; show -colors 2 -width -signed"
 show_graph:
-	gtkwave rca_tb.vcd
+	gtkwave m_rca_tb.vcd
 

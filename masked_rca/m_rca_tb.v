@@ -1,15 +1,15 @@
 `timescale 1ns / 1ns
-module rca_tb;
+module m_rca_tb;
   reg [3:0]a0, a1, b0, b1;
   reg c_in;
   //reg a,b, d, e, f;
   wire [4:0]sum;
-  rca rca1(.a0(a0), .a1(a1), .b0(b0), .b1(b1), .c_in(c_in), .sum(sum));
+  m_rca mrca(.a0(a0), .a1(a1), .b0(b0), .b1(b1), .c_in(c_in), .sum(sum));
            
     initial
         begin
-            $dumpfile ("rca_tb.vcd");
-            $dumpvars (0, rca_tb);
+            $dumpfile ("m_rca_tb.vcd");
+            $dumpvars (0, m_rca_tb);
             #0 a0 = 4'b0000;
             #0 a1 = 4'b0001;
             #0 b0 = 4'b0010;

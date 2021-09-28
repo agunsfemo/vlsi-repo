@@ -15,62 +15,59 @@ Multiple full adder circuits can be cascaded in parallel to add an N-bit number.
 
   
 ## Verilog code:
-    
-        //This is the definition of a 4-bit ripple carry full_adder
+       //This is the definition of a 4-bit ripple carry full_adder
 	module f_a(a,b, c_in, s, c_out);
       	input a,b, c_in;
       	output s, c_out;
       	reg s, c_out, d, e, f;
       	always @(*)
       	begin
-	 d <= a & b;
-      	 e <= b & c_in;
-      	 f <= c_in & a;
-      	 s <= a ^ b ^ c_in;
-      	 c_out <= d | e | f;
+      	d <= a & b;
+      	e <= b & c_in;
+      	f <= c_in & a;
+      	s <= a ^ b ^ c_in;
+      	c_out <= d | e | f;
       	end
 	endmodule
 
 
-	module rca #(parameter N=4)(input [N-1:0] a,b, input c_in, output [N:0] sum);
+	module rca #(parameter N=4)(input [N-1:0] a,b,  output [N:0] sum);
   	wire [N:0] carry;
   	wire [N-1 : 0]s;
-  	assign carry[0] = c_in;
+  	assign carry[0] = 1'b0;
    
-   	genvar i;
-   	generate
-   	for(i=0; i < N; i=i+1)
-   	 begin
-   	  f_a f(a[i], b[i], carry[i], s[i], carry[i+1]);
-    	 end
-     	endgenerate
+  	 genvar i;
+  	 generate 
+  	 for(i=0;i< N;i=i+1)
+  	 begin
+  	 f_a f(a[i], b[i], carry[i], s[i], carry[i+1]);
+     	 end
+     	 endgenerate
    	assign sum = {carry[N], s};
 	endmodule 
+        
     
 ## Testbench code:
 
        `timescale 1ns / 1ns
 	module rca_tb;
-  		reg [3:0]a, b;
-  		reg c_in;
-  		wire [4:0]sum;
-  		rca rca1(.a(a), .b(b), .c_in(c_in), .sum(sum));
+  	reg [3:0]a, b;
+  	reg c_in;
+  	wire [4:0]sum;
+  	rca rca1(.a(a), .b(b), .sum(sum));
            
-    		initial
+    	initial
         	begin
-            		$dumpfile ("rca_tb.vcd");
-            		$dumpvars (0, rca_tb);
-            		#0 a = 4'b0000;
-            		#0 b = 4'b0001;
-            		#0 c_in = 1'b0;
-            		#20 $finish ;
+        	    $dumpfile ("rca_tb.vcd");
+        	    $dumpvars (0, rca_tb);
+        	    #0 a = 4'b0000;
+        	    #0 b = 4'b0001;
+        	    #20 $finish ;
         	end
-        	always #2 a = a + 1'b1;
-	        always #2 b = b + 1'b1;
-	        always #2 c_in = c_in + 1'b1;
+     	always #2 a = a + 1'b1;
+	always #2 b = b + 1'b1;
 	endmodule
-        
         
 ## gtkwave output
 
-![Screenshot from 2021-09-28 01-07-01](https://user-images.githubusercontent.com/88589656/135014910-4b724be5-8b3c-4e25-92e1-5723b096e307.png)
+
