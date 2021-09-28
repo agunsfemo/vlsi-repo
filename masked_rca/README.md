@@ -44,3 +44,36 @@ This example aims at showcasing boolean masked full-adder as follows:
         endgenerate
       assign sum = {carry[N], s};
     endmodule 
+    
+## Testbench code:
+
+        `timescale 1ns / 1ns
+        module rca_tb;
+        reg [3:0]a0, a1, b0, b1;
+        reg c_in;
+        wire [4:0]sum;
+        
+        rca rca1(.a0(a0), .a1(a1), .b0(b0), .b1(b1), .c_in(c_in), .sum(sum));
+           
+        initial
+            begin
+            $dumpfile ("rca_tb.vcd");
+            $dumpvars (0, rca_tb);
+            #0 a0 = 4'b0000;
+            #0 a1 = 4'b0001;
+            #0 b0 = 4'b0010;
+            #0 b1 = 4'b0100;
+            #0 c_in = 1'b0;
+            #20 $finish ;
+            end
+            always #2 a0 = a0 + 1'b1;
+	        always #2 a1 = a1 + 1'b1;
+	        always #2 b0 = b0 + 1'b1;
+	        always #2 b1 = b1 + 1'b1;
+	        always #2 c_in = c_in + 1'b1;
+        endmodule
+        
+        
+## gtkwave output
+
+![Screenshot from 2021-09-28 01-07-01](https://user-images.githubusercontent.com/88589656/135014910-4b724be5-8b3c-4e25-92e1-5723b096e307.png)
