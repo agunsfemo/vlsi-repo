@@ -48,5 +48,17 @@ module pipe_rca #(parameter N= 4)(input [N-1:0] a0,a1,b0,b1, input c_in, clk1, c
       	f[0] <= c_in[0] & a[0];
       	s[0] <= a[0] ^ b[0] ^ c_in[0];
       	c_out[0] <= d[0] | e[0] | f[0];
-   
+  end
+  
+  always @(posedge clk2)
+  begin
+    	a[1] <= a0[1] ^ a1[1];
+      	b[1] <= b0[1] ^ b1[1];
+      	d[1] <= a[1] & b[1];
+      	e[1] <= b[1] & c_out[];
+      	f[0] <= c_in[0] & a[0];
+      	s[0] <= a[0] ^ b[0] ^ c_in[0];
+      	c_out[0] <= d[0] | e[0] | f[0];
+  end
+  
  
