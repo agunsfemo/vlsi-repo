@@ -1,4 +1,4 @@
-//This is the definition of a n-bit ripple carry full_adder
+//This is the definition of a 4-bit ripple carry full_adder
 module f_a(a,b, c_in, s, c_out);
       input a,b, c_in;
       output s, c_out;
