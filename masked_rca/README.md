@@ -3,10 +3,17 @@
 ## Introduction to Full Adder
 The full adder operation takes in three single bit binary **a**, **b**, **c_in** and the output of the full adder operation is given by **sum** and  **c_out** where **sum = a ^ b ^ c_in**, and **c_out = (a & b)  + (a & c_in) + b & c_in)**. Note that the **^** symbol represents XOR operation. 
 
+The logic gate combination of full-adder is shown below.
+![F_A](https://user-images.githubusercontent.com/88589656/135161809-21c5e9af-f471-41df-92cd-fabb0f3d6720.png)
+
+
 ## Ripple Carry Adder
 A ripple carry adder is a logic circuit in which the carry-out of each full adder is the carry in of the succeeding next most significant full adder. It is called a ripple carry adder because each carry bit gets rippled into the next stage.
+Multiple full adder circuits can be cascaded in parallel to add an N-bit number. For an N- bit parallel adder, there must be N number of full adder circuits. A ripple carry adder is a logic circuit in which the carry-out of each full adder is the carry in of the succeeding next most significant full adder. It is called a ripple carry adder because each carry bit gets rippled into the next  stage. In a ripple carry adder the sum and carry out bits of any half adder stage is not valid until the carry in of that stage occurs.Propagation delays inside the logic circuitry is the reason behind this. Propagation delay is time elapsed between the application of an input and occurance of the corresponding output.
+![RCA](https://user-images.githubusercontent.com/88589656/135162068-24ed5975-046e-40f1-8af3-d9af7dc049c2.png)
+  (Cascaded) Ripple carry Full Adder.
 
-In this example, a gate level boolean masking approach was used to for the computation of each single bit input **a**, and **b**. This was done by combining 2 shares of the inputs with an **XOR** gate. 
+  In this example, a gate level boolean masking approach was used to for the computation of each single bit input **a**, and **b**. This was done by combining 2 shares of the inputs with an **XOR** gate. 
 
 This example aims at showcasing boolean masked full-adder as follows:
 
