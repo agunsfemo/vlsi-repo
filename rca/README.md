@@ -73,4 +73,6 @@ Multiple full adder circuits can be cascaded in parallel to add an N-bit number.
         
 ## gtkwave output
 
-![Screenshot from 2021-09-28 01-07-01](https://user-images.githubusercontent.com/88589656/135014910-4b724be5-8b3c-4e25-92e1-5723b096e307.png)
+![gtkwave](https://user-images.githubusercontent.com/88589656/135169178-b491b894-7a09-46a7-bbaf-8b333375f9d5.png)
+![gtkwave1](https://user-images.githubusercontent.com/88589656/135169183-5ac7722b-c43e-42b4-8864-fb3bb7f48f4f.png)
+
