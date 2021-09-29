@@ -1,17 +1,15 @@
 # Masked Ripple Carry Full Adder
 
-## Introduction to Full Adder
-The full adder operation takes in three single bit binary **a**, **b**, **c_in** and the output of the full adder operation is given by **sum** and  **c_out** where **sum = a ^ b ^ c_in**, and **c_out = (a & b)  + (a & c_in) + b & c_in)**. Note that the **^** symbol represents XOR operation. 
+## Introduction
+We adopt the ripple-carry style of implementation for the adder first. It is composed of N 1-bit full adders where the carry-out from each adder is the carry-in for the next adder in the chain, starting from LSB. Therefore, ripple-carry configuration eases parameterization and modular design of the Boolean masked adders.
 
-The logic gate combination of full-adder is shown below.
-![F_A](https://user-images.githubusercontent.com/88589656/135161809-21c5e9af-f471-41df-92cd-fabb0f3d6720.png)
+![masked_rca](https://user-images.githubusercontent.com/88589656/135198003-88983159-048e-41c9-85b7-fc086659666c.png)
 
+## Design of a Masked Full Adder
+A 1-bit full adder takes as input two operands and a carry-in and generates the sum and the carry, which are a function of the two operands and the carry-in. If the input operand bits are denoted by 𝑎 and 𝑏 and carry-in bit by 𝑐, then the Boolean equation of
+the sum 𝑆 and the carry 𝐶 can be described as follows:
+![masked adder eqn](https://user-images.githubusercontent.com/88589656/135198246-7e03057b-7e8b-4965-8e90-980a1a686477.png)
 
-## Maked Ripple Carry Adder
-A ripple carry adder is a logic circuit in which the carry-out of each full adder is the carry in of the succeeding next most significant full adder. It is called a ripple carry adder because each carry bit gets rippled into the next stage.
-Multiple full adder circuits can be cascaded in parallel to add an N-bit number. For an N- bit parallel adder, there must be N number of full adder circuits. A ripple carry adder is a logic circuit in which the carry-out of each full adder is the carry in of the succeeding next most significant full adder. It is called a ripple carry adder because each carry bit gets rippled into the next  stage. In a ripple carry adder the sum and carry out bits of any half adder stage is not valid until the carry in of that stage occurs.Propagation delays inside the logic circuitry is the reason behind this. Propagation delay is time elapsed between the application of an input and occurance of the corresponding output.
-![RCA](https://user-images.githubusercontent.com/88589656/135162068-24ed5975-046e-40f1-8af3-d9af7dc049c2.png)
-  (Cascaded) Ripple carry Full Adder.
 
   In this example, a gate level boolean masking approach was used to for the computation of each single bit input **a**, and **b**. This was done by combining 2 shares of the inputs with an **XOR** gate. 
 
@@ -20,67 +18,63 @@ This example aims at showcasing boolean masked full-adder as follows:
 ## Verilog code:
     
         //This is the definition of a masked n-bit ripple carry full_adder
-      module f_a(a0, a1, b0, b1, c_in, s, c_out);
-      input a0, a1, b0, b1, c_in;
-      output s, c_out;
-      reg s, c_out, a,b,d, e, f;
-      always @(*)
-      begin
-        a <= a0 ^ a1;
-      	b <= b0 ^ b1;
-      	d <= a & b;
-      	e <= b & c_in;
-      	f <= c_in & a;
-      	s <= a ^ b ^ c_in;
-      	c_out <= d | e | f;
-      end
-      endmodule
+	module f_a(a0, a1, b0, b1, c_in, s, c_out);
+     	input a0, a1, b0, b1, c_in;
+      	output s, c_out;
+      	reg s, c_out, a,b,d, e, f;
+      	always @(*)
+      	begin
+        	a <= a0 ^ a1;
+      		b <= b0 ^ b1;
+      		d <= a & b;
+      		e <= b & c_in;
+      		f <= c_in & a;
+      		s <= a ^ b ^ c_in;
+      		c_out <= d | e | f;
+      	end
+	endmodule
 
 
-    module rca #(parameter N=4)(input [N-1:0] a0,a1,b0,b1, input c_in, output [N:0] sum);
-    wire [N:0] carry;
-    wire [N-1 : 0]s;
-    assign carry[0] = c_in;
+	module m_rca #(parameter N=4)(input [N-1:0] a0,a1,b0,b1, output [N:0] sum);
+  	wire [N:0] carry;
+  	wire [N-1 : 0]s;
+  	assign carry[0] = 1'b0;
    
-    genvar i;
-    generate 
-       for(i=0;i < N;i=i+1)
-       begin
-       f_a f(a0[i], a1[i], b0[i], b1[i], carry[i], s[i], carry[i+1]);
-       end
-       endgenerate
-      assign sum = {carry[N], s};
-    endmodule 
+   	genvar i;
+   	generate 
+   	for(i=0;i<N;i=i+1)
+     	begin     	
+     		f_a f(a0[i], a1[i], b0[i], b1[i], carry[i], s[i], carry[i+1]);
+     	end
+     	endgenerate
+   	assign sum = {carry[N], s};
+	endmodule 
     
 ## Testbench code:
 
-        	`timescale 1ns / 1ns
-        	module rca_tb;
-        	reg [3:0]a0, a1, b0, b1;
-        	reg c_in;
-        	wire [4:0]sum;
-        
-        	rca rca1(.a0(a0), .a1(a1), .b0(b0), .b1(b1), .c_in(c_in), .sum(sum));
+        `timescale 1ns / 1ns
+	module m_rca_tb;
+  		reg [3:0]a0, a1, b0, b1;
+  		wire [4:0]sum;
+  		m_rca mrca(.a0(a0), .a1(a1), .b0(b0), .b1(b1), .sum(sum));
            
-        	initial
-            	begin
-            	$dumpfile ("rca_tb.vcd");
-            	$dumpvars (0, rca_tb);
+    		initial
+       		begin
+            	$dumpfile ("m_rca_tb.vcd");
+            	$dumpvars (0, m_rca_tb);
             	#0 a0 = 4'b0000;
             	#0 a1 = 4'b0001;
             	#0 b0 = 4'b0010;
             	#0 b1 = 4'b0100;
-            	#0 c_in = 1'b0;
             	#20 $finish ;
-            	end
-            	always #2 a0 = a0 + 1'b1;
-	        	always #2 a1 = a1 + 1'b1;
-	        	always #2 b0 = b0 + 1'b1;
-	        	always #2 b1 = b1 + 1'b1;
-	        	always #2 c_in = c_in + 1'b1;
-        	endmodule
+        	end
+        	always #2 a0 = a0 + 1'b1;
+		always #2 a1 = a1 + 1'b1;
+		always #2 b0 = b0 + 1'b1;
+		always #2 b1 = b1 + 1'b1;
+	endmodule
         
         
 ## gtkwave output
+![Screenshot from 2021-09-28 01-07-01](https://user-images.githubusercontent.com/88589656/135198742-002bcf03-a47a-4600-8f31-8d04f16f4c04.png)
 
-![Screenshot from 2021-09-28 01-07-01](https://user-images.githubusercontent.com/88589656/135014910-4b724be5-8b3c-4e25-92e1-5723b096e307.png)
