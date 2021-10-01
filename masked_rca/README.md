@@ -9,6 +9,9 @@ We adopt the ripple-carry style of implementation for the adder first. It is com
 A 1-bit full adder takes as input two operands and a carry-in and generates the sum and the carry, which are a function of the two operands and the carry-in. If the input operand bits are denoted by 𝑎 and 𝑏 and carry-in bit by 𝑐, then the Boolean equation of
 the sum 𝑆 and the carry 𝐶 can be described as follows:
 ![masked adder eqn](https://user-images.githubusercontent.com/88589656/135198246-7e03057b-7e8b-4965-8e90-980a1a686477.png)
+![eqn4](https://user-images.githubusercontent.com/88589656/135199673-88bd8d1e-7242-4a9e-a592-7eb5972317c8.png)
+![eqn5](https://user-images.githubusercontent.com/88589656/135199675-dcd0814f-ef4c-46bb-8bc6-18d87240e173.png)
+
 
 
   In this example, a gate level boolean masking approach was used to for the computation of each single bit input **a**, and **b**. This was done by combining 2 shares of the inputs with an **XOR** gate. 
