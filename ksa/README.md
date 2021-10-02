@@ -13,17 +13,36 @@ The diagram for Kogge's Stone adder is shown below.
 An Adder is a fundamental block for an arithmetic operation and is the base of other mathematical operations like subtraction, multiplication and division. Kogge Stone Adder is analogous to both Parallel Prefix Adder (PPA) and Carry Look Ahead (CLA).
 
   A Parallel Prefix Adder (PPA) works in three main stages and could be named as the Pre-processing stage, Carry Graph stage and Post-processing stage.
+  
+  
   The pre-processing part will lead to the generation of the propagate (P) and generate (G) bits. The acquirement of the PPA carry bit differentiates it from other type of adders. It uses a parallel form of computing the carry bit that makes it performing addition arithmetic faster.
 Pi and Gi generated from pre-processing block based on equation:
+   
   Pi = xi XOR yi ............... (1)
+    
+    
   Gi = xi AND yi ................ (2)
-  Stage 1: In this stage, carries corresponds to each bit is computed.stage 1 is named as carry look-a head processing. In this stage carry look a head adder methodology is used to propagate and generate carry. Carry look ahead adder compute the one or more carry before calculating the sum which reduce time to calculate the sum of large bit size.
+   
+    
+   Stage 1: In this stage, carries corresponds to each bit is computed.stage 1 is named as carry look-a head processing. In this stage carry look a head adder methodology is used to propagate and generate carry. Carry look ahead adder compute the one or more carry before calculating the sum which reduce time to calculate the sum of large bit size.
 Both carry operator contains two AND gates and one OR gate. Operator uses propagate and generate as interconnected signals and given by equations (3) & (4)
+   
+   
   Pi = Pi AND Pi-1 ..................(3)
+    
+    
   Gi = Gi OR (Pi AND Gi-1 )..........(4)
-  Summation Process: In this final stage to calculate the sum and carryout of the input bits. This stage gives the final output of the adder. Generated carries are treated as final carries in the this stage. The sum bits (S i ) and carry bits (C i ) are given by following equations-
+    
+    
+  Summation Process: In this final stage to calculate the sum and carryout of the input bits. This stage gives the final output of the adder. Generated carries are treated as final carries in the this stage. The sum bits (Si ) and carry bits (Ci ) are given by following equations-
+    
+    
   Si = Pi XOR Ci-1 ............... (7)
+    
+    
   Ci = gi ........................ (8)
+    
+    
 While calculating carries bits, the circuit requires an initial carry i.e. **C_in**. Hence C_in is kept at **0** initially and therefore the initial carry bit i.e. **C0** = C_in. C_in is also used as a carry while executing initial summation bit i.e. **S0**.
   The verilog example presents the definition of a 4 bit Kogge Stone Adder as follows:
   ![4_bit_KSA](https://user-images.githubusercontent.com/88589656/135700711-f51ca0df-5d38-48e1-9e9b-0371f8a6c995.png)
