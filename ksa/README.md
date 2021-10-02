@@ -24,10 +24,12 @@ Both carry operator contains two AND gates and one OR gate. Operator uses propag
   Summation Process: In this final stage to calculate the sum and carryout of the input bits. This stage gives the final output of the adder. Generated carries are treated as final carries in the this stage. The sum bits (S i ) and carry bits (C i ) are given by following equations-
   Si = Pi XOR Ci-1 ............... (7)
   Ci = gi ........................ (8)
-While calculating carries bits, the circuit requires an initial carry i.e. **C_in**. Hence C_in is kept at **0** initially and therefore the initial carry bit i.e. **C0** = C_in. 
-C_in is also used as a carry while executing initial summation bit i.e. **S0**
+While calculating carries bits, the circuit requires an initial carry i.e. **C_in**. Hence C_in is kept at **0** initially and therefore the initial carry bit i.e. **C0** = C_in. C_in is also used as a carry while executing initial summation bit i.e. **S0**.
+  The verilog example presents the definition of a 4 bit Kogge Stone Adder as follows:
+  ![4_bit_KSA](https://user-images.githubusercontent.com/88589656/135700711-f51ca0df-5d38-48e1-9e9b-0371f8a6c995.png)
+
 ## Verilog code:
-The verilog example presents the definition of a 4 bit Kogge Stone Adder as follows:
+
 
        module ksa #(parameter N=4)(input [N-1:0] a,b, input c_in, output [N:0] sum);
   	reg [N-1:0] p,g,p1,g1,p2,g2,s;
